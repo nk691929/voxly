@@ -12,6 +12,7 @@ export const config = {
     "/history/:path*",
     "/settings/:path*",
     "/update-password",
+    "/change-password",
     "/login",
     "/signup",
     "/forgot-password",

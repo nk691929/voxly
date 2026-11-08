@@ -19,7 +19,7 @@ export default function SettingsPage() {
         <section className="card p-6">
           <h2 className="text-lg font-semibold">Password</h2>
           <p className="mt-2 text-sm text-muted">Choose a new password for your account.</p>
-          <Link href="/update-password" className="btn btn-ghost mt-4">Change password</Link>
+          <Link href="/change-password" className="btn btn-ghost mt-4">Change password</Link>
         </section>
         <DeleteAccount />
         <p className="text-sm text-muted">

@@ -3,7 +3,7 @@ import { isAuthPath, isProtectedPath } from "../../src/lib/supabase/paths";
 
 describe("route protection", () => {
   it("protects the app pages, including sub-pages", () => {
-    for (const p of ["/workspace", "/history", "/history/123", "/settings", "/update-password"]) {
+    for (const p of ["/workspace", "/history", "/history/123", "/settings", "/update-password", "/change-password"]) {
       expect(isProtectedPath(p)).toBe(true);
     }
   });

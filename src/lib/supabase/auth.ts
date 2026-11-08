@@ -2,7 +2,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { createClient } from "./server";
 
 export type AuthResult =
-  | { ok: true; supabase: SupabaseClient; userId: string }
+  | { ok: true; supabase: SupabaseClient; userId: string; email: string | null }
   | { ok: false; status: number; error: string };
 
 /**
@@ -18,5 +18,5 @@ export async function requireUser(): Promise<AuthResult> {
   }
   const { data, error } = await supabase.auth.getUser();
   if (error || !data.user) return { ok: false, status: 401, error: "Please sign in to continue." };
-  return { ok: true, supabase, userId: data.user.id };
+  return { ok: true, supabase, userId: data.user.id, email: data.user.email ?? null };
 }
