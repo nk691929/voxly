@@ -30,7 +30,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </div>
         </div>
       </header>
-      <main className="mx-auto max-w-5xl px-5 py-10">{children}</main>
+      <main id="main" className="mx-auto max-w-5xl px-5 py-10">{children}</main>
     </div>
   );
 }

@@ -14,3 +14,14 @@ export function validatePassword(password: string): string | null {
 export function validateCredentials(email: string, password: string): string | null {
   return validateEmail(email) ?? validatePassword(password);
 }
+
+/** Checks the "change password" form. */
+export function validatePasswordChange(current: string, next: string, confirm: string): string | null {
+  if (current.length === 0) return "Enter your current password.";
+  if (current.length > 72) return "Your current password is incorrect.";
+  const problem = validatePassword(next);
+  if (problem) return problem;
+  if (next !== confirm) return "The two new passwords do not match.";
+  if (next === current) return "Choose a new password that is different from your current one.";
+  return null;
+}

@@ -14,7 +14,11 @@ export const metadata: Metadata = {
     title: `${site.name} \u2014 ${site.tagline}`,
     description: site.description,
   },
-  twitter: { card: "summary", title: `${site.name} \u2014 ${site.tagline}`, description: site.description },
+  twitter: {
+    card: "summary_large_image",
+    title: `${site.name} \u2014 ${site.tagline}`,
+    description: site.description,
+  },
 };
 
 // Runs before the page paints so dark mode does not flash.
@@ -26,8 +30,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className="min-h-screen antialiased">{children}</body>
+      <body className="min-h-screen antialiased">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:border focus:border-line focus:bg-surface focus:px-4 focus:py-2 focus:text-sm focus:font-semibold"
+        >
+          Skip to content
+        </a>
+        {children}
+      </body>
     </html>
   );
 }
-

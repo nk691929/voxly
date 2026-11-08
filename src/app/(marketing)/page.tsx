@@ -8,6 +8,8 @@ import {
   LanguagesSection,
   Pricing,
 } from "@/components/marketing/Sections";
+import { JsonLd } from "@/components/shared/JsonLd";
+import { site } from "@/config/site";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -16,6 +18,22 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@graph": [
+            { "@type": "WebSite", name: site.name, url: site.url, description: site.description },
+            {
+              "@type": "SoftwareApplication",
+              name: site.name,
+              url: site.url,
+              description: site.description,
+              applicationCategory: "BusinessApplication",
+              operatingSystem: "Web",
+            },
+          ],
+        }}
+      />
       <Hero />
       <Features />
       <HowItWorks />

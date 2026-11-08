@@ -1,5 +1,5 @@
 /** Which pages need a signed-in user. Pure functions, easy to test. */
-const PROTECTED = ["/workspace", "/history", "/settings", "/update-password"];
+const PROTECTED = ["/workspace", "/history", "/settings", "/update-password", "/change-password"];
 const AUTH_PAGES = ["/login", "/signup", "/forgot-password"];
 
 function matches(path: string, base: string): boolean {
