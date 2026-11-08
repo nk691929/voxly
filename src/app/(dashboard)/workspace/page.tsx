@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+import { UsageSummary } from "@/features/usage/components/UsageSummary";
 import { Recorder } from "@/features/recording/components/Recorder";
 
 export default function WorkspacePage() {
@@ -7,7 +9,12 @@ export default function WorkspacePage() {
       <p className="mt-2 max-w-2xl text-muted">
         Record or upload audio, check the transcript, then choose what Voxly should write.
       </p>
-      <div className="mt-8">
+      <div className="mt-3 min-h-5">
+        <Suspense fallback={null}>
+          <UsageSummary />
+        </Suspense>
+      </div>
+      <div className="mt-6">
         <Recorder />
       </div>
     </>

@@ -1,4 +1,4 @@
-import { languageName } from "@/config/plans";
+import { PLANS, languageName, type PlanId } from "@/config/plans";
 import { mockGenerate } from "@/lib/ai/mock";
 import { buildInstructions, wrapTranscript } from "@/lib/ai/prompts";
 import { generateText, getTextProvider } from "@/lib/ai/provider";
@@ -6,7 +6,12 @@ import { saveGeneration } from "@/features/history/services/save-generation";
 import { createRateLimiter } from "@/lib/security/rate-limit";
 import { json } from "@/lib/security/request";
 import { requireUser } from "@/lib/supabase/auth";
+import { checkQuota } from "@/lib/usage/quota";
+import { countUsage, recordUsage } from "@/lib/usage/usage";
 import { generateSchema } from "@/lib/validation/generate";
+
+// Until billing exists, every signed-in user is on the Free plan.
+const PLAN: PlanId = "free";
 
 const limiter = createRateLimiter({ limit: 20, windowMs: 60_000 });
 
@@ -41,6 +46,13 @@ export async function POST(request: Request) {
     return json({ output: mockGenerate(outputType, transcript, targetLanguageName), mock: true, saved: false });
   }
 
+  // Monthly limit, checked on the server from the database (never from the browser).
+  const limit = PLANS[PLAN].monthlyGenerations;
+  const used = await countUsage(auth.supabase, "generation");
+  if (used === null) return json({ error: "Could not check your usage. Please try again." }, 503);
+  const quota = checkQuota("generation", limit, used);
+  if (!quota.ok) return json({ error: quota.error }, 429);
+
   let output: string;
   try {
     output = await generateText(
@@ -54,6 +66,7 @@ export async function POST(request: Request) {
   }
   if (!output) return json({ error: "The AI returned an empty result. Please try again." }, 502);
 
+  await recordUsage(auth.supabase, "generation", limit);
   const saved = await saveGeneration(auth.supabase, {
     outputType,
     sourceText: transcript,

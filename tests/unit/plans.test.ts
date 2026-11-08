@@ -1,44 +1,19 @@
 import { describe, expect, it } from "vitest";
-import {
-  PLANS,
-  checkTranscription,
-  isLanguageCode,
-  languageName,
-  remainingMinutes,
-} from "../../src/config/plans";
+import { PLANS, isLanguageCode, languageName } from "../../src/config/plans";
 
 describe("plans", () => {
   it("free plan is smaller than pro", () => {
-    expect(PLANS.free.monthlyMinutes).toBeLessThan(PLANS.pro.monthlyMinutes);
+    expect(PLANS.free.monthlyTranscriptions).toBeLessThan(PLANS.pro.monthlyTranscriptions);
+    expect(PLANS.free.monthlyGenerations).toBeLessThan(PLANS.pro.monthlyGenerations);
   });
-
-  it("calculates remaining minutes and never goes negative", () => {
-    expect(remainingMinutes("free", 10)).toBe(20);
-    expect(remainingMinutes("free", 999)).toBe(0);
-    expect(remainingMinutes("free", -5)).toBe(30);
-    expect(remainingMinutes("free", Number.NaN)).toBe(30);
+  it("every limit is a positive number", () => {
+    for (const plan of Object.values(PLANS)) {
+      expect(plan.monthlyTranscriptions).toBeGreaterThan(0);
+      expect(plan.monthlyGenerations).toBeGreaterThan(0);
+      expect(plan.maxRecordingSeconds).toBeGreaterThan(0);
+      expect(plan.maxFileBytes).toBeGreaterThan(0);
+    }
   });
-
-  it("allows a normal recording", () => {
-    expect(checkTranscription("free", 0, 120).ok).toBe(true);
-  });
-
-  it("blocks recordings that are too long for the plan", () => {
-    const result = checkTranscription("free", 0, PLANS.free.maxRecordingSeconds + 1);
-    expect(result.ok).toBe(false);
-  });
-
-  it("blocks when not enough minutes remain", () => {
-    const result = checkTranscription("free", 29.5, 120);
-    expect(result.ok).toBe(false);
-  });
-
-  it("rejects invalid durations", () => {
-    expect(checkTranscription("free", 0, 0).ok).toBe(false);
-    expect(checkTranscription("free", 0, -3).ok).toBe(false);
-    expect(checkTranscription("free", 0, Number.NaN).ok).toBe(false);
-  });
-
   it("recognizes supported languages", () => {
     expect(isLanguageCode("ur")).toBe(true);
     expect(isLanguageCode("xx")).toBe(false);

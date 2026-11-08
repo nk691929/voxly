@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Copy, Loader2, Mic, Sparkles, Square, Trash2, Upload } from "lucide-react";
 import { LANGUAGES, PLANS } from "@/config/plans";
@@ -30,6 +31,7 @@ function formatTime(total: number): string {
 }
 
 export function Recorder() {
+  const router = useRouter();
   const [phase, setPhase] = useState<Phase>("idle");
   const [seconds, setSeconds] = useState(0);
   const [audioFile, setAudioFile] = useState<File | null>(null);
@@ -170,6 +172,7 @@ export function Recorder() {
       setTranscript(data.text);
       setDemoMode(Boolean(data.mock));
       setNotice("Transcript ready. Check it, fix anything, then generate.");
+      router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Transcription failed.");
     } finally {
@@ -197,6 +200,7 @@ export function Recorder() {
       setResult(data.output);
       setDemoMode(Boolean(data.mock));
       setNotice(data.saved ? "Saved to your history." : null);
+      router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Generation failed.");
     } finally {
