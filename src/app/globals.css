@@ -146,3 +146,8 @@ body {
   .rise { animation: none; }
   .btn { transition: none; }
 }
+
+:root {
+  --font-inter: "Inter Variable";
+  --font-fraunces: "Fraunces Variable";
+}
