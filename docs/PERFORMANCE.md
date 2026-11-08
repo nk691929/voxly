@@ -18,3 +18,13 @@ Local numbers differ from a deployed site. Re-measure on the real deployment.
 - Two web fonts are bundled (Inter, Fraunces); check their weight in the Network tab.
 - The home page ships client JavaScript only for the theme toggle.
 - The workspace loads the recorder code only on that page.
+
+## Measured on 8 November 2026 (local production build, reported by the owner)
+| Page | Device | Performance | Accessibility | Best practices | SEO |
+|---|---|---|---|---|---|
+| / | Mobile | 100 | 100 | 100 | 100 |
+| / | Desktop | 100 | 100 | 100 | 100 |
+
+Before the fix: mobile performance 81-82, accessibility 96 (low contrast on the call-to-action button in dark mode).
+Changes: dark-mode button contrast, fonts loaded locally with preload.
+Not yet measured: /voice-to-email, the deployed site, real devices. These local scores are not a guarantee for the live site.
