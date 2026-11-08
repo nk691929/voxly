@@ -146,11 +146,11 @@ export function Faq() {
 export function FinalCta() {
   return (
     <section className="mx-auto max-w-6xl px-5 pb-24">
-      <div className="rounded-3xl bg-gradient-to-br from-primary to-violet p-10 text-center text-white sm:p-16">
+      <div className="rounded-3xl bg-gradient-to-br from-[#4338ca] to-[#7c3aed] p-10 text-center text-white sm:p-16">
         <Sparkles className="mx-auto h-8 w-8" aria-hidden="true" />
         <h2 className="mt-4 font-display text-4xl font-semibold">Say it once. Send it done.</h2>
         <p className="mx-auto mt-3 max-w-xl text-white/85">Try Voxly with a quick voice note and see the difference.</p>
-        <Link href="/workspace" className="btn mt-8 bg-white text-primary">Open the workspace</Link>
+        <Link href="/workspace" className="btn mt-8 bg-white text-[#4338ca]">Open the workspace</Link>
       </div>
     </section>
   );
