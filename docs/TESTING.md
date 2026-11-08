@@ -9,10 +9,17 @@
 | `npm test` | Unit tests (Vitest) |
 | `npm run build` | The production build succeeds |
 
-All four must pass before merging a branch. CI (GitHub Actions) runs the same four on every pull request.
+All four must pass before merging a branch. CI runs the same four on every pull request.
 
-## What the unit tests cover now
-- `tests/unit/plans.test.ts`: plan limits, remaining minutes, transcription checks, language list.
+## Unit tests
+- `plans.test.ts`: plan limits, remaining minutes, transcription checks, languages
+- `audio.test.ts`: file size, type, and magic-byte checks (a renamed .txt must be rejected)
+- `rate-limit.test.ts`: limits, separate clients, window reset
+- `prompts.test.ts`: instructions, and the prompt-injection defence for transcripts
+- `parse.test.ts`: reading the AI response safely
+- `generate-schema.test.ts`: request validation for `/api/generate`
 
-## Not tested yet
-- Page rendering and accessibility (to be covered by Playwright end-to-end tests).
+## Not tested automatically yet
+- The recorder UI and real microphone behaviour (manual checklist in README.txt)
+- Real OpenAI calls (only the parsing and request-building logic is tested)
+- End-to-end browser tests (Playwright) and accessibility checks
