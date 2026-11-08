@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { connection } from "next/server";
 import { PLANS } from "@/config/plans";
 import { getSupabaseEnv } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
@@ -7,6 +8,8 @@ import { HistoryItem } from "./HistoryItem";
 
 /** Runs on the server. Row Level Security means the database only returns this user's rows. */
 export async function HistoryList() {
+  // Wait for a real request first. This list is personal, so it must never be built ahead of time.
+  await connection();
   if (!getSupabaseEnv()) {
     return <p role="alert" className="text-accent">Accounts are not configured on the server.</p>;
   }
@@ -38,3 +41,4 @@ export async function HistoryList() {
     </ul>
   );
 }
+
