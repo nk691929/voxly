@@ -1,18 +1,15 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { LogOut } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 
 export function SignOutButton() {
-  const router = useRouter();
-
   async function signOut() {
     try {
       await createClient().auth.signOut();
     } finally {
-      router.replace("/login");
-      router.refresh();
+      // A full page load wipes the transcript, results and form text left on screen.
+      window.location.assign("/login");
     }
   }
 

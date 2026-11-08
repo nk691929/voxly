@@ -1,14 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { validateCredentials } from "@/lib/validation/auth";
 
 export function AuthForm({ mode }: { mode: "login" | "signup" }) {
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
@@ -34,8 +32,9 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
           setError("Incorrect email or password.");
           return;
         }
-        router.replace("/workspace");
-        router.refresh();
+        // A full page load wipes everything the previous account left in the browser.
+        setPassword("");
+        window.location.assign("/workspace");
       } else {
         const { data, error: err } = await supabase.auth.signUp({
           email: email.trim(),
@@ -47,8 +46,8 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
           return;
         }
         if (data.session) {
-          router.replace("/workspace");
-          router.refresh();
+          setPassword("");
+          window.location.assign("/workspace");
         } else {
           setNotice("Check your email and click the confirmation link, then sign in.");
         }
