@@ -83,7 +83,8 @@ export function LanguagesSection() {
 function PlanCard({ id, price, cta, highlight }: { id: "free" | "pro"; price: string; cta: React.ReactNode; highlight?: boolean }) {
   const p = PLANS[id];
   const items = [
-    `${p.monthlyMinutes} transcription minutes per month`,
+    `${p.monthlyTranscriptions} transcriptions per month`,
+    `${p.monthlyGenerations} AI generations per month`,
     `Recordings up to ${Math.round(p.maxRecordingSeconds / 60)} minutes`,
     p.historyItems === null ? "Unlimited history" : `Last ${p.historyItems} items in history`,
     id === "pro" ? "Advanced tones and formats" : "Basic email and note generation",
@@ -122,7 +123,7 @@ export function Pricing() {
 const faqs = [
   { q: "Does Voxly store my recordings?", a: "No. Audio is sent to a speech-to-text provider to be transcribed and is not kept by Voxly. We will describe exactly what is stored, and for how long, in our privacy policy before launch." },
   { q: "Which languages does it support?", a: "English, Spanish, French, German, Arabic, Hindi, Urdu and Portuguese. Accuracy varies by language and audio quality, so always review the transcript." },
-  { q: "Is it free?", a: "Yes, there is a free plan with a monthly limit on transcription minutes. Paid plans are not available yet." },
+  { q: "Is it free?", a: "Yes, there is a free plan with monthly limits on transcriptions and AI generations. Paid plans are not available yet." },
   { q: "Do I need an account?", a: "Not yet. Accounts, saved history and billing are coming in later releases." },
 ];
 
