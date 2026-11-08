@@ -78,6 +78,11 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
           required
         />
         {!isLogin && <p className="mt-1 text-xs text-muted">At least 8 characters.</p>}
+        {isLogin && (
+          <Link href="/forgot-password" className="mt-2 inline-block text-xs font-semibold text-primary">
+            Forgot your password?
+          </Link>
+        )}
       </div>
       <div aria-live="polite">
         {error && <p role="alert" className="text-sm text-accent">{error}</p>}
