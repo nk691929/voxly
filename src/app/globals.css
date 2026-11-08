@@ -90,7 +90,7 @@ body {
   }
   .btn-primary {
     background: linear-gradient(135deg, var(--primary), var(--violet));
-    color: #fff;
+    color: var(--on-primary);
     box-shadow: var(--shadow-pop);
   }
   .btn-primary:hover:not(:disabled) {
@@ -145,9 +145,4 @@ body {
   html { scroll-behavior: auto; }
   .rise { animation: none; }
   .btn { transition: none; }
-}
-
-:root {
-  --font-inter: "Inter Variable";
-  --font-fraunces: "Fraunces Variable";
 }
