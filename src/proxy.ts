@@ -7,5 +7,14 @@ export async function proxy(request: NextRequest) {
 
 // Only the pages and routes that care about login. The public marketing pages are untouched.
 export const config = {
-  matcher: ["/workspace/:path*", "/history/:path*", "/login", "/signup", "/api/:path*"],
+  matcher: [
+    "/workspace/:path*",
+    "/history/:path*",
+    "/settings/:path*",
+    "/update-password",
+    "/login",
+    "/signup",
+    "/forgot-password",
+    "/api/:path*",
+  ],
 };

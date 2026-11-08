@@ -21,6 +21,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <nav aria-label="App" className="flex gap-4 text-sm font-medium">
               <Link href="/workspace" className="text-muted hover:text-fg">Workspace</Link>
               <Link href="/history" className="text-muted hover:text-fg">History</Link>
+              <Link href="/settings" className="text-muted hover:text-fg">Settings</Link>
             </nav>
           </div>
           <div className="flex items-center gap-2">
