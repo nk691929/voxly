@@ -121,10 +121,10 @@ export function Pricing() {
 }
 
 const faqs = [
-  { q: "Does Voxly store my recordings?", a: "No. Audio is sent to a speech-to-text provider to be transcribed and is not kept by Voxly. We will describe exactly what is stored, and for how long, in our privacy policy before launch." },
+  { q: "Does Voxly store my recordings?", a: "No. Audio is sent to a speech-to-text provider to be transcribed and is not kept by Voxly. The privacy notice explains what is stored and for how long." },
   { q: "Which languages does it support?", a: "English, Spanish, French, German, Arabic, Hindi, Urdu and Portuguese. Accuracy varies by language and audio quality, so always review the transcript." },
   { q: "Is it free?", a: "Yes, there is a free plan with monthly limits on transcriptions and AI generations. Paid plans are not available yet." },
-  { q: "Do I need an account?", a: "Not yet. Accounts, saved history and billing are coming in later releases." },
+  { q: "Do I need an account?", a: "Yes. You need a free account to use the workspace. Your recent results are saved to your history, and you can delete them or your whole account at any time." },
 ];
 
 export function Faq() {
